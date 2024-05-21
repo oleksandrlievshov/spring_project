@@ -1,112 +1,61 @@
 # spring_project
 ІПЗ-22 Лєвшов Олександр
+# Dean's Office System
 
-# Функціональні вимоги
-User Authentication and Authorization:
+## Функціональні вимоги
 
-Users must be able to log in and log out securely.
-Users must have roles (e.g., student, faculty staff, admin) with different permissions.
-Student Inquiry Submission:
+1. **Аутентифікація та авторизація користувачів:**
+   - Користувачі (викладачі/співробітники та студенти) повинні мати можливість входити в систему за допомогою своїх облікових даних.
+   - Система повинна розрізняти різні ролі користувачів (викладач/співробітник, студент) та надавати доступ відповідно до цих ролей.
 
-Students must be able to submit inquiries through a form.
-The form must include fields for inquiry type, description, and attachments.
-Inquiry Processing:
+2. **Подання запитів:**
+   - Студенти повинні мати можливість подавати запити до деканату, вказуючи тип запиту, дату та опис.
 
-Faculty staff must be able to view and process student inquiries.
-Actions taken on inquiries must be logged (e.g., status updates, comments).
-Certificate Request and Issuance:
+3. **Управління запитами:**
+   - Викладачі/співробітники повинні мати можливість переглядати, оновлювати та керувати запитами студентів.
+   - Викладачі/співробітники можуть оновлювати статус запиту (наприклад, очікує, в процесі, вирішено).
 
-Students must be able to request certificates through an online form.
-The system must track certificate requests and their statuses.
-Inquiry Log Maintenance:
+4. **Відстеження журналу запитів:**
+   - Система повинна вести журнал всіх дій, виконаних з запитом, включаючи співробітника, який обробляв запит, та результат запиту.
 
-The system must log all actions taken on inquiries, including timestamps and responsible staff.
-Dashboard and Notifications:
+5. **Запит та видача сертифікатів:**
+   - Студенти повинні мати можливість запитувати різні сертифікати через систему.
+   - Викладачі/співробітники повинні мати можливість обробляти та видавати сертифікати, оновлюючи систему датою видачі та деталями сертифіката.
 
-Users must have a dashboard displaying pending inquiries, requests, and status updates.
-Users must receive notifications for important updates (e.g., inquiry processed, certificate ready).
-User Profile Management:
+6. **Система сповіщень:**
+   - Студенти повинні отримувати сповіщення, коли статус їхнього запиту змінюється.
+   - Викладачі/співробітники повинні отримувати сповіщення про нові запити або запити на сертифікати.
 
-Users must be able to view and edit their profiles, including contact information.
-Reporting and Analytics:
+7. **Управління профілем:**
+   - Користувачі повинні мати можливість оновлювати інформацію свого профілю (контактні дані тощо).
 
-The system must generate reports on inquiry statistics (e.g., number of inquiries processed, average processing time).
-Admins must be able to export data in various formats (e.g., CSV, PDF).
-Search and Filter Functionality:
+8. **Звіти та аналітика:**
+   - Система повинна генерувати звіти про кількість та типи запитів та виданих сертифікатів, а також про показники продуктивності викладачів/співробітників.
 
-Users must be able to search and filter inquiries and certificates by various criteria (e.g., date, status, type).
-Data Security and Privacy:
+9. **Управління документами:**
+   - Система повинна дозволяти студентам та співробітникам завантажувати та керувати документами, пов’язаними з запитами та сертифікатами.
 
-The system must ensure the security and privacy of user data.
-Data access must be restricted based on user roles.
-Mockups
-1. Login Page
-Fields: Username, Password
-Button: Login
-Link: Forgot Password
-2. Student Dashboard
-Sections: Pending Inquiries, Pending Certificates, Recent Notifications
-Buttons: Submit Inquiry, Request Certificate
-3. Inquiry Submission Form
-Fields: Inquiry Type (dropdown), Description (textarea), Attachments (file upload)
-Button: Submit
-4. Faculty Staff Dashboard
-Sections: Inquiries to Process, Recent Actions
-Buttons: Process Inquiry, Update Status
-5. Inquiry Processing Page
-Fields: Actions (textarea), Status (dropdown), Add Comment (textarea)
-Button: Save
-6. Certificate Request Form
-Fields: Certificate Type (dropdown), Description (textarea)
-Button: Submit
-7. Admin Dashboard
-Sections: Inquiries Overview, Certificates Overview, Reports
-Buttons: Export Data, Generate Report
-8. User Profile Page
-Fields: First Name, Last Name, Email, Contact Info
-Button: Save Changes
-9. Search and Filter Page
-Fields: Search Bar, Filters (date range, status, type)
-Button: Apply Filters
-10. Notifications Page
-List: Notification items with links to related inquiries/certificates
-System Behavior and REST API Endpoints
-System Behavior
-Authentication: Users authenticate with username and password, receiving a token for session management.
-Inquiry Submission: When a student submits an inquiry, it is saved in the database and an entry is created in the inquirylog table.
-Inquiry Processing: Faculty staff updates the status of an inquiry, which is logged in the inquirylog.
-Certificate Requests: Student requests are logged and processed similarly to inquiries.
-Notifications: System sends notifications based on events like status updates or new actions logged.
-REST API Endpoints
-User Authentication
+10. **Аудит та історія:**
+    - Система повинна зберігати повну історію всіх дій, пов’язаних із запитами та сертифікатами, для аудиторських цілей.
 
-POST /api/auth/login: Authenticate user and return token.
-POST /api/auth/logout: Log out user.
-User Management
+## REST API
 
-GET /api/users/{userId}: Get user profile.
-PUT /api/users/{userId}: Update user profile.
-Inquiries
-
-POST /api/inquiries: Submit a new inquiry.
-GET /api/inquiries: Get list of inquiries (with filters).
-GET /api/inquiries/{inquiryId}: Get details of a specific inquiry.
-PUT /api/inquiries/{inquiryId}: Update inquiry status or details.
-Inquiry Logs
-
-GET /api/inquiries/{inquiryId}/logs: Get logs for a specific inquiry.
-POST /api/inquiries/{inquiryId}/logs: Add a new log entry for an inquiry.
-Certificates
-
-POST /api/certificates: Request a new certificate.
-GET /api/certificates: Get list of certificate requests (with filters).
-GET /api/certificates/{certificateId}: Get details of a specific certificate.
-PUT /api/certificates/{certificateId}: Update certificate request status or details.
-Notifications
-
-GET /api/notifications: Get list of notifications for the authenticated user.
-Reports
-
-GET /api/reports/inquiries: Get report on inquiries.
-GET /api/reports/certificates: Get report on certificates.
-These requirements and endpoints provide a comprehensive system for managing student inquiries and certificate requests, ensuring efficient processing and tracking within a faculty or academic department.
+| HTTP Метод | URL | Опис | Параметри запиту | Приклад відповіді |
+|------------|-----|------|------------------|-------------------|
+| **POST** | `/api/login` | Вхід користувача | `{ "username": "string", "password": "string" }` | `{ "token": "jwt_token", "role": "student/faculty" }` |
+| **POST** | `/api/logout` | Вихід користувача | `{ "token": "jwt_token" }` | `{ "message": "Вихід успішний" }` |
+| **POST** | `/api/inquiries` | Подання запиту | `{ "studentId": "string", "inquiryType": "string", "description": "string", "date": "YYYY-MM-DD" }` | `{ "inquiryId": "string", "status": "pending" }` |
+| **GET** | `/api/inquiries` | Отримання запитів студента | `{ "studentId": "string" }` | `[ { "inquiryId": "string", "inquiryType": "string", "date": "YYYY-MM-DD", "status": "string" } ]` |
+| **GET** | `/api/inquiries/{inquiryId}` | Отримання деталей запиту | None | `{ "inquiryId": "string", "studentId": "string", "inquiryType": "string", "description": "string", "date": "YYYY-MM-DD", "status": "string", "logs": [ { "logId": "string", "staffId": "string", "processingDate": "YYYY-MM-DD", "actions": "string", "result": "string" } ] }` |
+| **PUT** | `/api/inquiries/{inquiryId}` | Оновлення статусу запиту | `{ "status": "string" }` | `{ "message": "Запит успішно оновлено" }` |
+| **POST** | `/api/inquiries/{inquiryId}/log` | Додавання запису до журналу запиту | `{ "staffId": "string", "actions": "string", "result": "string", "processingDate": "YYYY-MM-DD" }` | `{ "logId": "string" }` |
+| **POST** | `/api/certificates` | Запит на сертифікат | `{ "studentId": "string", "certificateType": "string", "details": "string" }` | `{ "certificateId": "string", "status": "pending" }` |
+| **GET** | `/api/certificates` | Отримання сертифікатів студента | `{ "studentId": "string" }` | `[ { "certificateId": "string", "certificateType": "string", "issueDate": "YYYY-MM-DD", "status": "string" } ]` |
+| **PUT** | `/api/certificates/{certificateId}` | Видача сертифіката | `{ "issueDate": "YYYY-MM-DD", "content": "string" }` | `{ "message": "Сертифікат успішно видано" }` |
+| **POST** | `/api/notifications` | Надсилання сповіщення | `{ "userId": "string", "message": "string" }` | `{ "notificationId": "string" }` |
+| **GET** | `/api/profile` | Отримання профілю користувача | `{ "userId": "string" }` | `{ "firstName": "string", "lastName": "string", "contactInfo": "string" }` |
+| **PUT** | `/api/profile` | Оновлення профілю користувача | `{ "userId": "string", "firstName": "string", "lastName": "string", "contactInfo": "string" }` | `{ "message": "Профіль успішно оновлено" }` |
+| **GET** | `/api/reports/inquiries` | Звіти про запити | `{ "startDate": "YYYY-MM-DD", "endDate": "YYYY-MM-DD" }` | `[ { "inquiryType": "string", "count": "number" } ]` |
+| **GET** | `/api/reports/certificates` | Звіти про сертифікати | `{ "startDate": "YYYY-MM-DD", "endDate": "YYYY-MM-DD" }` | `[ { "certificateType": "string", "count": "number" } ]` |
+| **POST** | `/api/documents` | Завантаження документу | `{ "relatedId": "string", "type": "inquiry/certificate", "document": "file" }` | `{ "documentId": "string", "uploadDate": "YYYY-MM-DD" }` |
+| **GET** | `/api/documents/{relatedId}` | Отримання документів | None | `[ { "documentId": "string", "uploadDate": "YYYY-MM-DD", "fileUrl": "string" } ]` |
