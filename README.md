@@ -1,7 +1,7 @@
 # spring_project
 ІПЗ-22 Лєвшов Олександр
 
-Functional Requirements
+# Функціональні вимоги
 User Authentication and Authorization:
 
 Users must be able to log in and log out securely.
